@@ -1,9 +1,11 @@
 part of 'widgets.dart';
 
 class CategoryCard extends StatelessWidget {
-  const CategoryCard({Key? key, this.image, this.title}) : super(key: key);
-  final String? image;
-  final String? title;
+  const CategoryCard({
+    Key? key,
+    this.category,
+  }) : super(key: key);
+  final model.Category? category;
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +20,8 @@ class CategoryCard extends StatelessWidget {
         children: [
           SizedBox(
             height: 40,
-            child: Image.asset(
-              image!,
+            child: Image.network(
+              category!.image.toString(),
               fit: BoxFit.cover,
             ),
           ),
@@ -28,7 +30,7 @@ class CategoryCard extends StatelessWidget {
             width: MediaQuery.of(context).size.width,
             child: Center(
               child: Text(
-                title!,
+                category!.name.toString(),
                 style: buttonTextStyle.copyWith(color: Colors.black),
                 maxLines: 2,
               ),

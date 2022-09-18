@@ -12,13 +12,16 @@ class _SplashPageState extends State<SplashPage> {
   // ignore: must_call_super
   void initState() {
     Timer(const Duration(seconds: 3), () {
-      Navigator.pushNamedAndRemoveUntil(
-          context, '/home', (route) => false);
+      Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    context.read<SliderCubit>().getSlider();
+    context.read<CategoryCubit>().getCategory();
+    context.read<DonationCubit>().getCampaign();
+
     return Scaffold(
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,

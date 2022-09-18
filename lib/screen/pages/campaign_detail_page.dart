@@ -1,9 +1,10 @@
+// ignore_for_file: use_build_context_synchronously
+
 part of 'pages.dart';
 
 class CampaginDetailPage extends StatelessWidget {
-  const CampaginDetailPage({
-    Key? key,
-  }) : super(key: key);
+  const CampaginDetailPage({Key? key, this.donation}) : super(key: key);
+  final Donation? donation;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class CampaginDetailPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () => Navigator.pop(context),
                     child: Container(
                       margin: const EdgeInsets.only(left: 10),
                       height: 40,
@@ -75,8 +76,8 @@ class CampaginDetailPage extends StatelessWidget {
                           height: 150,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(12),
-                            image: const DecorationImage(
-                              image: AssetImage('assets/images/campaign1.jpeg'),
+                            image: DecorationImage(
+                              image: NetworkImage(donation!.image!.toString()),
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -93,7 +94,7 @@ class CampaginDetailPage extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   Text(
-                                    '90 Hari',
+                                    donation!.maxDate.toString(),
                                     style: buttonTextStyle.copyWith(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold),
@@ -110,7 +111,7 @@ class CampaginDetailPage extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           width: MediaQuery.of(context).size.width,
                           child: Text(
-                            'Sedekah pembangunan masjid korban bencana',
+                            donation!.title.toString(),
                             style: buttonTextStyle.copyWith(
                               color: Colors.black,
                               fontWeight: FontWeight.w600,
@@ -123,7 +124,7 @@ class CampaginDetailPage extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           width: MediaQuery.of(context).size.width,
                           child: Text(
-                            'Yayasan Al-Irsyadi',
+                            donation!.name!,
                             style: buttonTextStyle.copyWith(
                               color: Colors.grey,
                               fontWeight: FontWeight.w300,
@@ -138,12 +139,12 @@ class CampaginDetailPage extends StatelessWidget {
                             animation: true,
                             animationDuration: 1000,
                             center: Text(
-                              '70%',
+                              '${donation!.percent!.round()} %',
                               style: buttonTextStyle.copyWith(
                                   color: Colors.black, fontSize: 12),
                             ),
                             backgroundColor: Colors.grey[400],
-                            percent: 0.7,
+                            percent: (donation!.percent! / 100),
                             lineHeight: 20,
                             progressColor: successColor,
                             barRadius: const Radius.circular(10),
@@ -157,7 +158,13 @@ class CampaginDetailPage extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  '70.000.000',
+                                  NumberFormat.currency(
+                                          decimalDigits: 0,
+                                          locale: 'id-ID',
+                                          symbol: 'Rp. ')
+                                      .format(
+                                    int.parse(donation!.terkumpul!),
+                                  ),
                                   style: buttonTextStyle.copyWith(
                                     color: Colors.green,
                                   ),
@@ -169,26 +176,17 @@ class CampaginDetailPage extends StatelessWidget {
                                   ),
                                 ),
                                 Text(
-                                  '100.000.000',
+                                  NumberFormat.currency(
+                                          decimalDigits: 0,
+                                          locale: 'id-ID',
+                                          symbol: 'Rp. ')
+                                      .format(donation!.targetDonation),
                                   style: buttonTextStyle.copyWith(
                                     color: primaryColor,
                                   ),
                                 ),
                               ],
                             ),
-                          ),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          width: MediaQuery.of(context).size.width,
-                          child: Text(
-                            '10 Donatur',
-                            style: buttonTextStyle.copyWith(
-                              color: Colors.amber,
-                              fontWeight: FontWeight.w300,
-                            ),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
                         const SizedBox(
@@ -204,9 +202,25 @@ class CampaginDetailPage extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(12),
                               ),
                             ),
-                            onPressed: () {
-                              Navigator.pushNamedAndRemoveUntil(
-                                  context, '/payment', (route) => false);
+                            onPressed: () async {
+                              bool checkToken = await UserServices.checkToken();
+                              if (checkToken) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => PaymentPage(
+                                      donation: donation,
+                                    ),
+                                  ),
+                                );
+                              } else {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const LoginPage(),
+                                  ),
+                                );
+                              }
                             },
                             child: Text(
                               'Donasi sekarang',
@@ -264,7 +278,7 @@ class CampaginDetailPage extends StatelessWidget {
                               width: 10,
                             ),
                             Text(
-                              'Yayasan Al-Irsyadi',
+                              donation!.name!,
                               style: buttonTextStyle.copyWith(
                                 color: Colors.black,
                               ),
@@ -290,7 +304,7 @@ class CampaginDetailPage extends StatelessWidget {
                           height: 10,
                         ),
                         Text(
-                          'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum',
+                          Bidi.stripHtmlIfNeeded(donation!.description!),
                           style: buttonTextStyle.copyWith(
                             color: Colors.black,
                           ),

@@ -1,8 +1,8 @@
 part of 'widgets.dart';
 
 class SliderCard extends StatelessWidget {
-  const SliderCard({Key? key, this.image}) : super(key: key);
-  final String? image;
+  const SliderCard({Key? key, this.slider}) : super(key: key);
+  final model.Slider? slider;
 
   @override
   Widget build(BuildContext context) {
@@ -14,8 +14,8 @@ class SliderCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(6),
         color: Colors.white,
       ),
-      child: Image.asset(
-        image!,
+      child: Image.network(
+        slider!.image.toString(),
         fit: BoxFit.contain,
       ),
     );

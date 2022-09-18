@@ -74,31 +74,31 @@ class CampaignPage extends StatelessWidget {
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: const [
-                    CategoryCard(
-                      image: 'assets/images/baby.png',
-                      title: 'Anak',
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    CategoryCard(
-                      image: 'assets/images/disaster.png',
-                      title: 'Bencana',
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    CategoryCard(
-                      image: 'assets/images/mosque.png',
-                      title: 'Rumah Ibadah',
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    CategoryCard(
-                      image: 'assets/images/more.png',
-                      title: 'Lainnya',
-                    ),
+                    // CategoryCard(
+                    //   image: 'assets/images/baby.png',
+                    //   title: 'Anak',
+                    // ),
+                    // SizedBox(
+                    //   width: 10,
+                    // ),
+                    // CategoryCard(
+                    //   image: 'assets/images/disaster.png',
+                    //   title: 'Bencana',
+                    // ),
+                    // SizedBox(
+                    //   width: 10,
+                    // ),
+                    // CategoryCard(
+                    //   image: 'assets/images/mosque.png',
+                    //   title: 'Rumah Ibadah',
+                    // ),
+                    // SizedBox(
+                    //   width: 10,
+                    // ),
+                    // CategoryCard(
+                    //   image: 'assets/images/more.png',
+                    //   title: 'Lainnya',
+                    // ),
                   ],
                 ),
               ),
@@ -111,39 +111,39 @@ class CampaignPage extends StatelessWidget {
                 child: ListView(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   children: const [
-                    CampaignCard(
-                      name: 'Yayasal Al-Irsyadi',
-                      image: 'assets/images/campaign1.jpeg',
-                      time: '20 Hari',
-                      percent: 80,
-                      title: 'Donasi untuk rumah ibadah korban bencana alam',
-                      target: 100000000,
-                      terkumpul: 80000000,
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    CampaignCard(
-                      name: 'Yayasal Al-Irsyadi',
-                      image: 'assets/images/campaign3.jpeg',
-                      time: '20 Hari',
-                      percent: 50,
-                      title: 'Donasi untuk anak yatim',
-                      target: 100000000,
-                      terkumpul: 50000000,
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    CampaignCard(
-                      name: 'Yayasal Al-Irsyadi',
-                      image: 'assets/images/campaign2.jpeg',
-                      time: '20 Hari',
-                      percent: 70,
-                      title: 'Donasi untuk rumah korban bencana alam',
-                      target: 100000000,
-                      terkumpul: 70000000,
-                    ),
+                    // CampaignCard(
+                    //   name: 'Yayasal Al-Irsyadi',
+                    //   image: 'assets/images/campaign1.jpeg',
+                    //   time: '20 Hari',
+                    //   percent: 80,
+                    //   title: 'Donasi untuk rumah ibadah korban bencana alam',
+                    //   target: 100000000,
+                    //   terkumpul: 80000000,
+                    // ),
+                    // SizedBox(
+                    //   height: 5,
+                    // ),
+                    // CampaignCard(
+                    //   name: 'Yayasal Al-Irsyadi',
+                    //   image: 'assets/images/campaign3.jpeg',
+                    //   time: '20 Hari',
+                    //   percent: 50,
+                    //   title: 'Donasi untuk anak yatim',
+                    //   target: 100000000,
+                    //   terkumpul: 50000000,
+                    // ),
+                    // SizedBox(
+                    //   height: 5,
+                    // ),
+                    // CampaignCard(
+                    //   name: 'Yayasal Al-Irsyadi',
+                    //   image: 'assets/images/campaign2.jpeg',
+                    //   time: '20 Hari',
+                    //   percent: 70,
+                    //   title: 'Donasi untuk rumah korban bencana alam',
+                    //   target: 100000000,
+                    //   terkumpul: 70000000,
+                    // ),
                     SizedBox(
                       height: 40,
                     ),

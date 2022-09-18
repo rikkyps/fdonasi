@@ -21,8 +21,14 @@ class RouterApp {
       case '/campaign-detail':
         return MaterialPageRoute(builder: (_) => CampaginDetailPage());
         break;
+      case '/donation':
+        return MaterialPageRoute(builder: (_) => DonationPage());
+        break;
       case '/payment':
         return MaterialPageRoute(builder: (_) => PaymentPage());
+        break;
+      case '/payment-method':
+        return MaterialPageRoute(builder: (_) => PaymentMethodPage());
         break;
       case '/success':
         return MaterialPageRoute(builder: (_) => SuccessPage());

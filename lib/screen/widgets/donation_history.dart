@@ -1,17 +1,14 @@
 part of 'widgets.dart';
 
 class DonationHistoryPage extends StatelessWidget {
-  const DonationHistoryPage(
-      {Key? key, this.title, this.image, this.date, this.nominal, this.status})
-      : super(key: key);
-  final String? image, title, date, status, nominal;
+  const DonationHistoryPage({Key? key, this.donation}) : super(key: key);
+  final model.Payment? donation;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(10),
-      color: Colors.grey[200],
-      height: 100,
+      height: 130,
       width: MediaQuery.of(context).size.width,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -21,7 +18,7 @@ class DonationHistoryPage extends StatelessWidget {
             width: MediaQuery.of(context).size.width * 0.43,
             decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage(image!),
+                image: NetworkImage(donation!.image!),
                 fit: BoxFit.cover,
               ),
               borderRadius: BorderRadius.circular(12),
@@ -43,7 +40,7 @@ class DonationHistoryPage extends StatelessWidget {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.5 - 25,
                 child: Text(
-                  title!,
+                  donation!.title!,
                   style: buttonTextStyle.copyWith(
                     color: Colors.black,
                     fontWeight: FontWeight.w600,
@@ -58,7 +55,7 @@ class DonationHistoryPage extends StatelessWidget {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.5 - 25,
                 child: Text(
-                  date!,
+                  donation!.maxDate!,
                   style: buttonTextStyle.copyWith(
                       color: accentColor,
                       fontWeight: FontWeight.w300,
@@ -73,7 +70,9 @@ class DonationHistoryPage extends StatelessWidget {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.5 - 25,
                 child: Text(
-                  nominal!,
+                  NumberFormat.currency(
+                          locale: 'id-ID', decimalDigits: 0, symbol: 'Rp. ')
+                      .format(donation!.amount!),
                   style: buttonTextStyle.copyWith(
                       color: Colors.amber,
                       fontWeight: FontWeight.w600,
@@ -86,9 +85,13 @@ class DonationHistoryPage extends StatelessWidget {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.5 - 25,
                 child: Text(
-                  status!,
+                  donation!.status!,
                   style: buttonTextStyle.copyWith(
-                      color: successColor,
+                      color: (donation!.status! == 'success')
+                          ? successColor
+                          : (donation!.status! == 'pending')
+                              ? Colors.amber
+                              : Colors.red,
                       fontWeight: FontWeight.w300,
                       fontSize: 12),
                   maxLines: 1,
