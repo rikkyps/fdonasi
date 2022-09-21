@@ -11,7 +11,7 @@ class ShimmerCategory extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(5),
         height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width * 3 / 4,
+        width: MediaQuery.of(context).size.width * 1 / 3,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           color: Colors.black.withOpacity(0.3),

@@ -50,6 +50,66 @@ class UserServices {
     return ApiReturnValue(value: value);
   }
 
+  static Future<ApiReturnValue<User>> updatePassword(
+      String password, String confirmation,
+      {http.Client? client}) async {
+    client ?? http.Client();
+    String? token = await UserServices.getStoreToken();
+    var endPoint = Uri.http('donasi.codehater.net', '/api/profile/password');
+    var response = await http.post(
+      endPoint,
+      headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+      body: jsonEncode(
+        <String, String>{
+          'password': password,
+          'password_confirmation': confirmation,
+        },
+      ),
+    );
+
+    if (response.statusCode != 201) {
+      return ApiReturnValue(message: 'Update password gagal!');
+    }
+
+    var data = jsonDecode(response.body);
+    User value = User.fromJSON(data['data']);
+
+    return ApiReturnValue(value: value);
+  }
+
+  static Future<ApiReturnValue<User>> updateProfile(String name,
+      {http.Client? client}) async {
+    client ?? http.Client();
+    String? token = await UserServices.getStoreToken();
+    var endPoint = Uri.http('donasi.codehater.net', '/api/profile');
+    var response = await http.post(
+      endPoint,
+      headers: {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $token',
+      },
+      body: jsonEncode(
+        <String, String>{
+          'name': name,
+        },
+      ),
+    );
+
+    if (response.statusCode != 201) {
+      return ApiReturnValue(message: 'Update profile gagal!');
+    }
+
+    var data = jsonDecode(response.body);
+    User value = User.fromJSON(data['data']);
+
+    return ApiReturnValue(value: value);
+  }
+
   static Future<bool> checkToken() async {
     final prefs = await SharedPreferences.getInstance();
     final String token = prefs.getString('storeToken') ?? '';

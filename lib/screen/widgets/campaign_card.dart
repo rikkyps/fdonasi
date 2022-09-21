@@ -68,7 +68,7 @@ class CampaignCard extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 10),
             width: MediaQuery.of(context).size.width,
             child: Text(
-              donation!.name!,
+              donation!.name ?? 'No Name',
               style: buttonTextStyle.copyWith(
                 color: Colors.grey,
                 fontWeight: FontWeight.w300,
@@ -110,7 +110,7 @@ class CampaignCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                   'dari',
+                    'dari',
                     style: buttonTextStyle.copyWith(
                       color: Colors.grey,
                     ),

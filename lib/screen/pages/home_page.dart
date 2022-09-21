@@ -51,12 +51,24 @@ class _HomePageState extends State<HomePage> {
                               color: Colors.grey,
                             ),
                           ),
-                          child: TextField(
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: 'Cari yang ingin kamu bantu..',
-                              hintStyle: labelTextStyle,
-                            ),
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const MainPage(
+                                    index: 2,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Center(
+                                child: Text(
+                              'Cari yang ingin kamu bantu...',
+                              style:
+                                  buttonTextStyle.copyWith(color: Colors.black),
+                              textAlign: TextAlign.left,
+                            )),
                           ),
                         ),
                         SizedBox(
@@ -151,7 +163,15 @@ class _HomePageState extends State<HomePage> {
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.4,
                     width: MediaQuery.of(context).size.width,
-                    child: BlocBuilder<DonationCubit, DonationState>(
+                    child: BlocConsumer<DonationCubit, DonationState>(
+                      listener: (context, state) async {
+                        if (state is SearchLoaded ||
+                            state is SearchNotFound ||
+                            state is DonationUnLoaded ||
+                            state is LoadDonation) {
+                          await context.read<DonationCubit>().getCampaign();
+                        }
+                      },
                       builder: (context, state) => (state is DoantionLoaded)
                           ? ListView(
                               padding:

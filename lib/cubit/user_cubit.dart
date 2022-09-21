@@ -50,6 +50,33 @@ class UserCubit extends Cubit<UserState> {
     }
   }
 
+  Future<void> updatePassword(String password, String confirmation) async {
+    ApiReturnValue result =
+        await UserServices.updatePassword(password, confirmation);
+
+    emit(OnUpdatePassword());
+    await Future.delayed(const Duration(seconds: 2));
+
+    if (result.value != null) {
+      emit(UpdatePasswordDone(result.value));
+    } else {
+      emit(UpdatePasswordFailed(result.message!));
+    }
+  }
+
+  Future<void> updateProfile(String name) async {
+    ApiReturnValue result = await UserServices.updateProfile(name);
+
+    emit(OnUpdateProfile());
+    await Future.delayed(const Duration(seconds: 2));
+
+    if (result.value != null) {
+      emit(UpdateProfileDone(result.value));
+    } else {
+      emit(UpdateProfileFailed(result.message!));
+    }
+  }
+
   Future<void> logout() async {
     UserServices.removeToken();
     emit(Logout());

@@ -1,11 +1,9 @@
-import 'package:fdonasi/cubit/cubit.dart';
 import 'package:fdonasi/models/models.dart' as model;
 import 'package:fdonasi/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 import 'package:shimmer/shimmer.dart';
-
 
 part 'slider_card.dart';
 part 'campaign_card.dart';

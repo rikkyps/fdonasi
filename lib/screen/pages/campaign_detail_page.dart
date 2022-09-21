@@ -124,7 +124,7 @@ class CampaginDetailPage extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(horizontal: 10),
                           width: MediaQuery.of(context).size.width,
                           child: Text(
-                            donation!.name!,
+                            donation!.name ?? 'No name',
                             style: buttonTextStyle.copyWith(
                               color: Colors.grey,
                               fontWeight: FontWeight.w300,
@@ -278,7 +278,7 @@ class CampaginDetailPage extends StatelessWidget {
                               width: 10,
                             ),
                             Text(
-                              donation!.name!,
+                              donation!.name ?? 'Yayasan Al-Irsyadi',
                               style: buttonTextStyle.copyWith(
                                 color: Colors.black,
                               ),

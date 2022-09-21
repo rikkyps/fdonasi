@@ -35,6 +35,10 @@ class OnRegister extends UserState {}
 
 class OnCheckSession extends UserState {}
 
+class OnUpdatePassword extends UserState {}
+
+class OnUpdateProfile extends UserState {}
+
 class SessionLoaded extends UserState {
   final User user;
 
@@ -65,6 +69,40 @@ class FailedRegister extends UserState {
   final String message;
 
   const FailedRegister(this.message);
+
+  @override
+  List<Object> get props => [message];
+}
+
+class UpdatePasswordDone extends UserState {
+  final User user;
+
+  const UpdatePasswordDone(this.user);
+  @override
+  List<Object> get props => [user];
+}
+
+class UpdatePasswordFailed extends UserState {
+  final String message;
+
+  const UpdatePasswordFailed(this.message);
+
+  @override
+  List<Object> get props => [message];
+}
+
+class UpdateProfileDone extends UserState {
+  final User user;
+
+  const UpdateProfileDone(this.user);
+  @override
+  List<Object> get props => [user];
+}
+
+class UpdateProfileFailed extends UserState {
+  final String message;
+
+  const UpdateProfileFailed(this.message);
 
   @override
   List<Object> get props => [message];

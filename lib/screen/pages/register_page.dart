@@ -13,8 +13,7 @@ class RegisterPage extends StatelessWidget {
     return BlocConsumer<UserCubit, UserState>(
       listener: ((context, state) {
         if (state is SuccessRegister) {
-          Navigator.pushNamedAndRemoveUntil(
-              context, '/home', (route) => false);
+          Navigator.pushNamedAndRemoveUntil(context, '/home', (route) => false);
         } else if (state is FailedRegister) {
           _showLoginFailResult(context, state.message);
         }
@@ -218,8 +217,7 @@ class RegisterPage extends StatelessWidget {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.pushNamedAndRemoveUntil(
-                              context, '/login', (route) => false);
+                          Navigator.pop(context);
                         },
                         child: Text(
                           'Login',

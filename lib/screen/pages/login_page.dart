@@ -123,20 +123,6 @@ class _LoginPageState extends State<LoginPage> {
                         const SizedBox(
                           height: 2,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            GestureDetector(
-                              onTap: () {},
-                              child: Text(
-                                'Lupa password?',
-                                style: GoogleFonts.poppins().copyWith(
-                                    fontSize: 10,
-                                    color: const Color(0xff87ADF4)),
-                              ),
-                            ),
-                          ],
-                        ),
                         const SizedBox(
                           height: 25,
                         ),
@@ -187,8 +173,12 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                             GestureDetector(
                               onTap: () {
-                                Navigator.pushNamedAndRemoveUntil(
-                                    context, '/register', (route) => false);
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => RegisterPage(),
+                                  ),
+                                );
                               },
                               child: Text(
                                 'Register',

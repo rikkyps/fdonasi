@@ -45,7 +45,7 @@ class DonationServices {
     }
 
     var data = jsonDecode(response.body);
-    Donation value = Donation.fromJSON(data['data']);
+    Donation value = Donation.fromSearch(data['data']);
 
     return ApiReturnValue(value: value);
   }

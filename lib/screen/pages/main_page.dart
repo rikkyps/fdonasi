@@ -1,7 +1,8 @@
 part of 'pages.dart';
 
 class MainPage extends StatefulWidget {
-  const MainPage({Key? key}) : super(key: key);
+  final int? index;
+  const MainPage({Key? key, this.index}) : super(key: key);
 
   @override
   State<MainPage> createState() => _MainPageState();
@@ -9,8 +10,25 @@ class MainPage extends StatefulWidget {
 
 class _MainPageState extends State<MainPage> {
   int _currentIndex = 0;
-  final PageStorageBucket bucket = PageStorageBucket();
   Widget currentPage = const HomePage();
+
+  @override
+  void initState() {
+    if (widget.index != null) {
+      _currentIndex = widget.index!;
+      currentPage = (_currentIndex == 1)
+          ? const DonationPage()
+          : (_currentIndex == 2)
+              ? CampaignPage()
+              : (_currentIndex == 3)
+                  ? const ProfilePage()
+                  : const MainPage();
+    }
+    super.initState();
+  }
+
+  final PageStorageBucket bucket = PageStorageBucket();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,7 +46,7 @@ class _MainPageState extends State<MainPage> {
             } else if (_currentIndex == 1) {
               currentPage = const DonationPage();
             } else if (_currentIndex == 2) {
-              currentPage = const CampaignPage();
+              currentPage = CampaignPage();
             } else if (_currentIndex == 3) {
               currentPage = const ProfilePage();
             }

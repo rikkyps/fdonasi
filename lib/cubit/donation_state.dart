@@ -28,3 +28,23 @@ class DonationUnLoaded extends DonationState {
 }
 
 class LoadDonation extends DonationState {}
+
+class OnSearch extends DonationState {}
+
+class SearchLoaded extends DonationState {
+  final Donation donation;
+
+  const SearchLoaded(this.donation);
+
+  @override
+  List<Object> get props => [donation];
+}
+
+class SearchNotFound extends DonationState {
+  final String message;
+
+  const SearchNotFound(this.message);
+
+  @override
+  List<Object> get props => [message];
+}

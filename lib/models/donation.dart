@@ -68,6 +68,20 @@ class Donation extends Equatable {
       percent: (double.parse(data['sum_donation'][0]['total']) * 100) /
           (data['target_donation'] as int).toDouble());
 
+  factory Donation.fromSearch(Map<String, dynamic> data) => Donation(
+      id: data['id'],
+      title: data['title'],
+      slug: data['slug'],
+      categoryId: data['category_id'],
+      targetDonation: data['target_donation'],
+      maxDate: data['max_date'],
+      description: data['description'],
+      image: data['image'],
+      name: 'Yayasan Al-Irsaydi',
+      terkumpul: data['sum_donation'][0]['total'],
+      percent: (double.parse(data['sum_donation'][0]['total']) * 100) /
+          (data['target_donation'] as int).toDouble());
+
   @override
   List<Object?> get props => [
         id,
